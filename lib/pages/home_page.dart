@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/user.dart';
-import '../utils/colors.dart';
-import '../widgets/big_text.dart';
-import './login_page.dart';
+import 'package:moneyger_frontend/models/user.dart';
+import 'package:moneyger_frontend/utils/colors.dart';
+import 'package:moneyger_frontend/widgets/big_text.dart';
+import 'package:moneyger_frontend/pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
