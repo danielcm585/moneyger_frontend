@@ -24,46 +24,49 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.only(top: 50, left: 25, right: 25),
         child: Column(
           children: [
-            BigText(text: "Register", color: AppColor.orange, size: 22),
-            SizedBox(height: 50),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Input(
-                    label: "Username",
-                    placeholder: "my_username"
-                  ),
-                  SizedBox(height: 25),
-                  Input(
-                    label: "Email",
-                    placeholder: "my-email@gmail.com"
-                  ),
-                  SizedBox(height: 25),
-                  Input(
-                    label: "Password",
-                    placeholder: "my_password",
-                    password: true
-                  ),
-                  SizedBox(height: 25),
-                  Button(
-                    text: "Register",
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // TODO: Create a new account
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return LoginPage();
-                        }));
-                      }
-                    }
-                  ),
-                ]
-              ) 
+            Image.asset(
+              "assets/images/register.png",
+              height: 300,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BigText(text: "Register", color: AppColor.orange, size: 35),
+                SizedBox(height: 20),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Input(label: "Username"),
+                      SizedBox(height: 5),
+                      Input(label: "Email"),
+                      SizedBox(height: 5),
+                      Input(
+                        label: "Password",
+                        password: true
+                      ),
+                      SizedBox(height: 25),
+                      Button(
+                        text: "Register",
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // TODO: Create a new account
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return LoginPage();
+                            }));
+                          }
+                        }
+                      ),
+                    ]
+                  ) 
+                ),
+              ]
             ),
             SizedBox(height: 15),
             Button(

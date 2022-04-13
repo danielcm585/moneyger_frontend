@@ -20,13 +20,13 @@ class Input extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SmallText(text: label, size: 15, color: AppColor.black),
+        // SmallText(text: label, size: 15, color: AppColor.black),
         TextFormField(
           obscureText: password,
           obscuringCharacter: '*',
           decoration: InputDecoration(
             hintText: placeholder,
-            // labelText: label, 
+            labelText: label, 
             focusColor: AppColor.teal
           ),
           validator: (String? value) {

@@ -14,7 +14,7 @@ class ColorIconButton extends StatelessWidget {
     required this.icon,
     this.action = "",
     this.bgColor,
-    this.iconColor = Colors.white,
+    this.iconColor = const Color(0xffffffff),
     this.textColor = const Color(0xff3a405a),
     this.size = 50
   }) : super(key: key);

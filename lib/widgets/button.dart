@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
   const Button({ Key? key, 
     required this.text, 
     this.bgColor = const Color(0xff46a2a2), 
-    this.textColor = Colors.white, 
+    this.textColor = const Color(0xffffffff),
     this.width = double.infinity, 
     this.height = 45,
     required this.onPressed
@@ -28,7 +28,7 @@ class Button extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(bgColor),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
               )
             )
           ),
