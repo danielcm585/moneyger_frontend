@@ -28,11 +28,12 @@ class Navbar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle_outlined),
-          label: "Profile"
+          label: "Profile",
         ),
       ],
       currentIndex: currentPage,
       selectedItemColor: AppColor.teal,
+      unselectedItemColor: AppColor.black,
       onTap: (int idx) { setPage(idx); }
     );
   }
