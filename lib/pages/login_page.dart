@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:moneyger_frontend/pages/home_page.dart';
+import 'package:moneyger_frontend/pages/home_page/home_page.dart';
 import 'package:moneyger_frontend/pages/register_page.dart';
 import 'package:moneyger_frontend/widgets/button.dart';
 import 'package:moneyger_frontend/widgets/input_field.dart';
@@ -93,9 +93,6 @@ class _LoginPageState extends State<LoginPage> {
                                 if (resp.statusCode >= 400) throw Exception("Login failed");
                                 final json = jsonDecode(utf8.decode(resp.bodyBytes)) as Map;
                                 widget.setUser(User.fromJson(json));
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                //   return HomePage();
-                                // }));
                               }
                               catch (err) {
                                 log("BEUH");

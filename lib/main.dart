@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneyger_frontend/models/user.dart';
-import 'package:moneyger_frontend/pages/home_page.dart';
+import 'package:moneyger_frontend/pages/home_page/home_page.dart';
 import 'package:moneyger_frontend/pages/login_page.dart';
 import 'package:moneyger_frontend/utils/colors.dart';
 

@@ -102,6 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 );
                                 if (resp.statusCode >= 400) throw Exception("Register failed");
+                                Navigator.pop(context, "Back to login");
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) {
                                 //   return LoginPage(setUser: widget.setUser);
                                 // }));
