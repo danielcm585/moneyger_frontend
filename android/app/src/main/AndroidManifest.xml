@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.moneyger_frontend">
+
+<uses-permission android:name="android.permission.INTERNET"/>
+    
    <application
         android:label="moneyger_frontend"
         android:name="${applicationName}"
@@ -30,7 +33,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <uses-permission android:name="android.permission.INTERNET"/>
     </application>
 </manifest>
 

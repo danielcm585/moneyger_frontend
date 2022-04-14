@@ -1,42 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:moneyger_frontend/utils/colors.dart';
-import 'package:moneyger_frontend/widgets/small_text.dart';
 
 class Input extends StatelessWidget {
   final String label;
+  final IconData? icon;
   final String placeholder;
   final bool password;
-  final void Function(String?)? validator;
+  final validator;
+  final setState;
   
   const Input({ Key? key,
     this.label = "",
+    this.icon,
     this.placeholder = "",
     this.password = false,
-    this.validator
+    required this.validator,
+    required this.setState
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // SmallText(text: label, size: 15, color: AppColor.black),
-        TextFormField(
-          obscureText: password,
-          obscuringCharacter: '*',
-          decoration: InputDecoration(
-            hintText: placeholder,
-            labelText: label, 
-            focusColor: AppColor.teal
-          ),
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return "This field cannot be emtpy";
-            }
-            return null;
-          }, // FIXME: Change to custom func
-        )
-      ]
+    return InkResponse(
+      child: TextFormField(
+        obscureText: password,
+        obscuringCharacter: '*',
+        // keyboardType: TextInputType.emailAddress,
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+          icon: Icon(icon),
+          // iconColor: AppColor.teal,
+          hintText: placeholder,
+          labelText: label,
+          // floatingLabelStyle: TextStyle(color: AppColor.teal),
+          // focusedBorder: UnderlineInputBorder(
+          //   borderSide: BorderSide(color: AppColor.teal)
+          // ),
+        ),
+        onChanged: (String? val) { setState(val); },
+        validator: validator
+      )
     );
   }
 }
