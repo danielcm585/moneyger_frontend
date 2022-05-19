@@ -2,7 +2,7 @@ import 'package:moneyger_frontend/models/wallet.dart';
 import 'package:moneyger_frontend/models/activity.dart';
 
 class User {
-  String? _id;
+  String? id;
   String? username;
   String? email;
   String? photo;
@@ -10,10 +10,18 @@ class User {
   List<Wallet>? wallet;
   List<Activity>? history;
 
-  User(this._id, this.username, this.email, this.photo, this.balance, this.wallet, this.history);
+  User(
+    this.id, 
+    this.username, 
+    this.email, 
+    this.photo, 
+    this.balance, 
+    this.wallet, 
+    this.history
+  );
 
   User.fromJson(Map<dynamic, dynamic> json) {
-    _id = json["_id"];
+    id = json["_id"];
     username = json["username"];
     email = json["email"];
     photo = json["photo"];
@@ -30,5 +38,9 @@ class User {
         history!.add(Wallet.fromJson(history));
       });
     }
+  }
+
+  getWalletID(String label) {
+    return wallet!.where((wallet) => wallet.label == label).toList()[0].id;
   }
 }

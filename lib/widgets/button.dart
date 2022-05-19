@@ -5,36 +5,43 @@ class Button extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color textColor;
+  final double textSize;
   final double width;
   final double height;
+  final bool isLoading;
   final void Function() onPressed;
 
   const Button({ Key? key, 
     required this.text, 
     this.bgColor = const Color(0xff46a2a2), 
     this.textColor = const Color(0xffffffff),
+    this.textSize = 17,
     this.width = double.infinity, 
     this.height = 45,
+    this.isLoading = false,
     required this.onPressed
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height,
       width: width,
-      child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(bgColor),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              )
-            )
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: FlatButton(
+            padding: EdgeInsets.all(0),
+            color: bgColor,
+            onPressed: onPressed,
+            child: isLoading ?
+              SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(color: textColor, strokeWidth: 3)
+              ) : 
+              BigText(text: text, color: textColor, size: textSize)
           ),
-          onPressed: onPressed,
-          child: BigText(text: text, color: textColor, size: 17)
-        )
+      )
     );
   }
 }

@@ -20,25 +20,17 @@ class Input extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkResponse(
-      child: TextFormField(
-        obscureText: password,
-        obscuringCharacter: '*',
-        // keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          icon: Icon(icon),
-          // iconColor: AppColor.teal,
-          hintText: placeholder,
-          labelText: label,
-          // floatingLabelStyle: TextStyle(color: AppColor.teal),
-          // focusedBorder: UnderlineInputBorder(
-          //   borderSide: BorderSide(color: AppColor.teal)
-          // ),
-        ),
-        onChanged: (String? val) { setState(val); },
-        validator: validator
-      )
+    return TextFormField(
+      obscureText: password,
+      // obscuringCharacter: '*',
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        icon: Icon(icon),
+        hintText: placeholder,
+        labelText: label,
+      ),
+      onChanged: (String? val) { setState(val); },
+      validator: validator
     );
   }
 }

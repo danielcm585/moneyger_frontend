@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
-import 'package:moneyger_frontend/pages/home_page/home_page.dart';
 import 'package:moneyger_frontend/pages/register_page.dart';
 import 'package:moneyger_frontend/widgets/button.dart';
 import 'package:moneyger_frontend/widgets/input_field.dart';
 import 'package:moneyger_frontend/widgets/big_text.dart';
 import 'package:moneyger_frontend/models/user.dart';
 import 'package:moneyger_frontend/utils/colors.dart';
+import 'package:moneyger_frontend/widgets/link_button.dart';
+import 'package:moneyger_frontend/widgets/small_text.dart';
 
 class LoginPage extends StatefulWidget {
   final setUser;
@@ -25,12 +28,9 @@ class _LoginPageState extends State<LoginPage> {
   static GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
   String? _username, _password;
-  setUsername(String value) {
-    setState(() { _username = value; });
-  }
-  setPassword(String value) {
-    setState(() { _password = value; });
-  }
+  bool _isLoading = false;
+  setUsername(String value) => setState(() => _username = value);
+  setPassword(String value) => setState(() => _password = value);
   
   @override
   Widget build(BuildContext context) {
@@ -38,16 +38,17 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: AppColor.white,
       body: Container(
-        width: MediaQuery.of(context).size.width,
+        width: double.infinity,
         padding: EdgeInsets.only(top: 50, left: 25, right: 25),
         child: SingleChildScrollView(
           reverse: true,
           child: Column(
             children: [
-              Image.asset(
-                "assets/images/login.png",
-                height: 250,
+              SvgPicture.asset(
+                "assets/images/login.svg",
+                height: 290,
               ),
+              SizedBox(height: 5),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -80,8 +81,10 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 25),
                         Button(
                           text: "Login", 
+                          isLoading: _isLoading,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
+                              setState(() => _isLoading = true);
                               try {
                                 final resp = await http.post(
                                   Uri.parse("https://moneyger-backend.dcm.my.id/user/login"),
@@ -92,9 +95,11 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                                 if (resp.statusCode >= 400) throw Exception("Login failed");
                                 final json = jsonDecode(utf8.decode(resp.bodyBytes)) as Map;
+                                setState(() => _isLoading = false);
                                 widget.setUser(User.fromJson(json));
                               }
                               catch (err) {
+                                setState(() => _isLoading = false);
                                 log("BEUH");
                               }
                             }
@@ -106,15 +111,19 @@ class _LoginPageState extends State<LoginPage> {
                 ]
               ),
               SizedBox(height: 15),
-              Button(
-                text: "Register",
-                bgColor: AppColor.white,
-                textColor: AppColor.teal,
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return RegisterPage(setUser: widget.setUser);
-                  }));
-                }
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SmallText(text: "Don't have an Account? ", size: 15, color: AppColor.teal),
+                  LinkButton(
+                    text: "Register",
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return RegisterPage(setUser: widget.setUser);
+                      }));
+                    }
+                  )
+                ],
               )
             ],
           )
